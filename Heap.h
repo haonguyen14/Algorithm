@@ -13,3 +13,9 @@ class Heap {
 		int  getMin();
 		bool isEmpty();
 };
+
+
+int getParent(int);
+int getLeftChild(int);
+int getRightChild(int);
+int swap(vector<int> &, int, int);
