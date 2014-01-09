@@ -11,7 +11,7 @@ def LPS(string):
 	i = 1
 	
 	while i < len(lps):
-		if string[i] == string[prevLen]:
+		if string[prevLen] == string[i]:
 			prevLen = prevLen + 1
 			lps[i] = prevLen
 
