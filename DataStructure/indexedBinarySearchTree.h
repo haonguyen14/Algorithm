@@ -38,6 +38,14 @@ class indexedBST
 			else
 				return NULL;
 		}
+		
+		node* getIndex( int i )
+		{
+			if( root != NULL )
+				getIndex( i, root );
+			else
+				return NULL;
+		}
 
 		void emptyTree( *node n ) 
 		{
@@ -115,7 +123,19 @@ class indexedBST
 			else if( val < n->value )
 				search( val, n->left );
 			else
-				searh( val, n->right );
+				search( val, n->right );
+		}
+
+		node* getIndex( int i, node* n )
+		{
+			if( n == NULL )
+				return NULL;
+			else if( i == n->indexValue )
+				return n;
+			else if( i < n->indexValue )
+				getIndex( i, n->left );
+			else
+				getIndex( i, n->right );
 		}
 		
 		void increaseParentIndex( node* n )
