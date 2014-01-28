@@ -1,4 +1,4 @@
-public class LeftistHeap<T extends Comparable<T>> {
+public class LeftistHeap<T> implements Heap<T> {
 	/*
 	 *	Simple Binary Tree Implementation
 	 */
