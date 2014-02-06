@@ -29,8 +29,8 @@ public class LeftistHeap<T> implements Heap<T> {
 	 *	Constructor
 	 *	Construct leftist heap
 	 */
-	public LeftistHeap() {
-		this.mTree = null;
+	public LeftistHeap(T data) {
+		this.mTree = new Tree<T>(data);
 	}
 
 
@@ -40,7 +40,7 @@ public class LeftistHeap<T> implements Heap<T> {
 	 *	Runtime: 
 	 */
 	public LeftistHeap(T[] input) {
-		
+		this.mTree = new Tree<T>(t[0]);	
 	}
 
 
@@ -49,7 +49,29 @@ public class LeftistHeap<T> implements Heap<T> {
 	 *	Runtime: 
 	 */
 	 public void merge(LeftistHeap<T> heap) {
+		if(heap == null)
+			return;
 
+		/* Compare Two Root Node */
+		if(this.mTree.mData.compareTo(heap.mData) < 0) {
+			heap.merge(this.mRight);
+			this.mRight = heap;
+		} else {
+			this.merge(heap.mRight);
+			heap.mRight = this;
+			this = heap;
+		}
+
+		/* Fix */
+		int leftNullPath = (this.mLeft == null) ? -1 : this.mLeft.getNullPathLength();
+		int rightNullPath = (this.mRight == null) ? -1 : this.mRight.getNullPathLength();
+
+		if(leftNullPath < rightNullPath) {
+			LeftistHeap<T> temp = this.mLeft;
+
+			this.mLeft = this.mRight;
+			this.mRight = temp;
+		}
 	 }
 
 
@@ -58,7 +80,7 @@ public class LeftistHeap<T> implements Heap<T> {
 	 *	Runtime:
 	 */
 	 public void insert(T data) {
-
+		this.merge(new LeftistHeap(data));
 	 }
 
 
@@ -67,7 +89,12 @@ public class LeftistHeap<T> implements Heap<T> {
 	  *	Runtime:
 	  */
 	  public T remove() {
+		T ret = this.mTree.mData;
 
+		this.mLeft.merge(this.mRight);
+		this = mLeft;
+
+		return ret;
 	  }
 
 
@@ -77,5 +104,14 @@ public class LeftistHeap<T> implements Heap<T> {
 	   */
 	   public T extract() {
 		return this.mTree.mData;
+	   }
+
+
+	   private int getNullPathLength() {
+		if(this.mLeft == null || this.mRight == null)
+			return 0;
+		else
+			return ((this.mLeft.getNullPathLength() > this.mRight.getNullPathLength()) ?
+				this.mRight.getNullPathLength() : this.mLeft.getNullPathLength()) + 1;
 	   }
 }
