@@ -47,15 +47,18 @@ public class LeftistHeap<T> implements Heap<T> {
 		/* Merge */
 		if(h1.mData.compareTo(h2.mData) < 0) {
 			newTree = h1;
-			newTree.mRight = LeftistHeap.merge(newTree.mRight, h2)
+			newTree.mRight = LeftistHeap.merge(newTree.mRight, h2);
 		} else {
 			newTree = h2;
-			newTree.mRight = LeftistHeap.merge(newTree.mRight, h1)
+			newTree.mRight = LeftistHeap.merge(newTree.mRight, h1);
 		}
 
 		
 		/* Fix */
-		if(newTree.mLeft.getNullPathLength() < newTree.mRight.getNullPathLength()) {
+		int leftNullPathLength = newTree.mLeft != null ? newTree.mLeft.getNullPathLength() : -1;
+		int rightNullPathLength = newTree.mRight != null ? newTree.mRight.getNullPathLength() : -1;
+
+		if(leftNullPathLength < rightNullPathLength) {
 			LeftistTree<T> temp = newTree.mLeft;
 
 			newTree.mLeft = newTree.mRight;
