@@ -1,4 +1,4 @@
-public Tree<T> {
+public class Tree<T> {
 	public T mData;
 
 	public Tree<T> mLeft;

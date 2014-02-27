@@ -15,10 +15,8 @@ public class Intersection {
 
 		/* List 2 */
 		node5.mNext = node6;
-		node6.mNext = node1;
 
-
-		System.out.println("Intersection: " + intersect(node1, node5).mData);
+		System.out.println("Intersection: " + (intersect(node1, node5) != null ? intersect(node1, node5) : "null") );
 	}
 
 	public static <T> ListNode<T> intersect(ListNode<T> l1, ListNode<T> l2) {
@@ -45,6 +43,12 @@ public class Intersection {
 
 		
 		/* Get Intersection */
+		if(fast == null) {
+			tail.mNext = null;
+			return null;
+		}
+
+
 		slow = l1;
 		while(slow != fast) {
 			slow = slow.mNext;
