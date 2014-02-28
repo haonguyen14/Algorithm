@@ -32,9 +32,8 @@ public class DisjointSet<T> implements IDisjointSet<T> {
 		T nextKey = table.get(prevKey);
 		while(prevKey != nextKey) {	
 			/* Move Up */
-			T temp = prevKey;
 			prevKey = nextKey;
-			nextKey = table.get(temp);
+			nextKey = table.get(nextKey);
 		}
 
 		table.put(item, prevKey);
