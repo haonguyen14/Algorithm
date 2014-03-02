@@ -18,19 +18,19 @@ public class LowestCommonAncestor {
 	 *	Assumption:	There is no duplicate node
 	 *
 	 */
-	public static <T extends Comparable<T>> T LCA(Tree<T> root, T a, T b) {
+	public static <T extends Comparable<T>> Tree<T> LCA(Tree<T> root, T a, T b) {
 		/* Edge Condition */
 		if(root == null)
 			return null;
 		if(root.mData.compareTo(a) == 0 || root.mData.compareTo(b) == 0)
-			return root.mData;
+			return root;
 
 		
-		T left = LCA(root.mLeft, a, b);
-		T right = LCA(root.mRight, a, b);
+		Tree<T> left = LCA(root.mLeft, a, b);
+		Tree<T> right = LCA(root.mRight, a, b);
 
 		if(left != null && right != null)
-			return root.mData;
+			return root;
 		else
 			return (left != null) ? left : right;
 	}
