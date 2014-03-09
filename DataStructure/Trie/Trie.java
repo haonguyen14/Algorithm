@@ -1,5 +1,5 @@
 public class Trie {
-	private Trie[] subTries;
+	protected Trie[] subTries;
 
 	/**
 	 *	Root Constructor
