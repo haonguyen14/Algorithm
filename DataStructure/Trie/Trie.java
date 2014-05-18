@@ -35,7 +35,7 @@ public class Trie {
 	/**
 	 *	Check for Prefix
 	 */
-	public boolean hasPrefix(String prefix) {
+	public int hasPrefix(String prefix) {
 		Trie curr = this;
 
 		int i = 0;
@@ -48,6 +48,7 @@ public class Trie {
 			i++;
 		}
 
-		return (i == prefix.length());
+		//return (i == prefix.length());
+		return i;
 	}
 }
