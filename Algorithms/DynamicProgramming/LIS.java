@@ -26,11 +26,6 @@ public class LIS {
 			lis[i] = max;
 		}
 
-		/* Debugging */
-		for(int i = 0; i < lis.length; i++)
-			System.out.print(lis[i] + " ");
-		System.out.println();
-
 		/* Find max */
 		int max = 0;
 		for(int i = 1; i < lis.length; i++)
