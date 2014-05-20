@@ -1,5 +1,5 @@
 /*
- *	Maximum Subarray using Divide-and-Conquer
+ *	Maximum Subarray
  */
 public class MaximumSubarray {
 	public static final int LOW = 0;
@@ -17,6 +17,7 @@ public class MaximumSubarray {
 	}
 
 
+	/* Divide & Conquer Solution*/
 	public static int[] maxSubarray(int[] arr, int low, int high) {
 		/* Edge Condition */
 		if(low == high)
@@ -68,5 +69,31 @@ public class MaximumSubarray {
 		}
 
 		return new int[] {leftI, rightI, leftM + rightM};
+	}
+	
+	
+	/* Recursive Solution */
+	public static int[] maxSubarray(int[] arr, int j) {
+		/* Edge Condition */
+		if(j == 0)
+			return new int[] {j, j, arr[j]};
+
+		int[] left = maxSubarray(arr, j - 1);
+
+		int maxS = left[SUM];
+		int maxI = -1;
+
+		int sum = 0;
+		for(int i = j; i >= 0; i--) {
+			sum += arr[i];
+			if(sum > maxS) {
+				maxI = i;
+				maxS = sum;
+			}
+		}
+
+		if(maxS == left[SUM])
+			return left;
+		return new int[] {maxI, j, maxS};
 	}
 }
