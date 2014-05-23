@@ -11,7 +11,36 @@ public class BinaryHeap<T extends Comparable<T>> implements Heap<T> {
 	public BinaryHeap(T[] input) {
 		this.mTree = new ArrayList<T>();
 		for(int i = 0; i < input.length; i++)
-			this.insert(input[i]);
+			this.mTree.add(input[i]);
+
+		// Heapify
+		for(int i = (input.length / 2) - 1; i >= 0; i--)
+			perculateDown(i);
+	}
+
+
+	public void perculateDown(int index) {
+		int curr = index;
+		while(curr < this.mTree.size()) {
+			int left = getLeft(curr);
+			left = left >= mTree.size() ? curr : left;
+
+			int right = getRight(curr);
+			right = right >= mTree.size() ? curr : right;
+
+			int min = curr;
+			if(mTree.get(min).compareTo(mTree.get(left)) > 0)
+				min = left;
+			if(mTree.get(min).compareTo(mTree.get(right)) > 0)
+				min = right;
+
+			if(min == curr) {
+			 	break;
+			} else {
+				swap(mTree, curr, min);
+				curr = min;
+			}
+		}
 	}
 
 
