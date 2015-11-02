@@ -1,18 +1,34 @@
 import java.util.Stack;
 
 
-public InorderTraversal {
+public class InorderTraversal {
 	
+	public static void main(String[] args) {
+		Tree<Integer> t = new Tree<Integer>( 1, 
+			new Tree<Integer>(2, new Tree<Integer>(3, null, null), 
+				    new Tree<Integer>(4, null, null)),
+			new Tree<Integer>(5, new Tree<Integer>(6, null, null), 
+				    new Tree<Integer>(7, null, null)) );
+		
+		Tree<Integer> t2 = new Tree<Integer>( 1, 
+			null,	
+			new Tree<Integer>(5, new Tree<Integer>(6, null, null), 
+				    new Tree<Integer>(7, null, null)) );
+
+
+		traverse(t2);
+	}
+
 	/*
 	 *	Recursive Version
 	 */
-	 public static void traverse(Tree<T> tree) {
+	 public static <T> void traverseRecur(Tree<T> tree) {
 		if(tree == null)
 			return;
 
-		travesrse(tree.mLeft);
+		traverseRecur(tree.mLeft);
 		System.out.print(tree.mData + " ");
-		traverse(tree.mRight);
+		traverseRecur(tree.mRight);
 	 }
 
 
@@ -20,7 +36,7 @@ public InorderTraversal {
 	 /*
 	  *	Iterative Version
 	  */
-	  public static void traverse(Tree<T> tree) {
+	  public static <T> void traverse(Tree<T> tree) {
 		Stack<Tree<T>> stack = new Stack<Tree<T>>();
 
 		Tree<T> current = tree;
@@ -33,6 +49,6 @@ public InorderTraversal {
 				System.out.println(current.mData + " ");
 				current = current.mRight;
 			}
-		} while(!stack.empty());
+		} while(!stack.empty() || current != null);
 	  }
 }
