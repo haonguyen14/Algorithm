@@ -33,6 +33,6 @@ public InorderTraversal {
 				System.out.println(current.mData + " ");
 				current = current.mRight;
 			}
-		} while(!stack.empty() && current != null);
+		} while(!stack.empty());
 	  }
 }
